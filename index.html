@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- APIs: Web Audio synthesizes music; MediaDevices/Analyser detects candle blows; Canvas 2D powers scratching and wish-jar physics; Pointer Events handle touch/mouse; DeviceMotion/Orientation add shake and tilt; Vibration adds haptics; Visibility pauses audio; IntersectionObserver and Web Animations reveal scenes; Fullscreen, Web Share, Wake Lock, and guarded localStorage provide optional conveniences. Optional exact-version CDN libraries: GSAP/ScrollTrigger (scene motion), canvas-confetti (celebrations), Three.js (welcome cone), and Howler.js (optional custom music). CSS/SVG and native API fallbacks keep the experience usable offline or when permissions/libraries fail. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff1e9">
+  <meta name="description" content="A little storybook birthday adventure made just for Lieam.">
+  <title>Lieam's Birthday Parlor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+  <link rel="stylesheet" href="style.css?v=27">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite">
+    <div class="loading-cone" aria-hidden="true"><span>🍓</span><span>🍦</span><span>🍪</span><b>🍦</b></div>
+    <p>Unwrapping a little birthday magic…</p>
+    <div class="loading-track"><div id="loadingFill" class="loading-fill"></div></div>
+  </div>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">🍦</span><span id="brandName">Birthday Parlor</span></div>
+      <div class="top-actions">
+        <button id="homeButton" class="utility-button home-button" type="button" aria-label="Return to the birthday world" title="Birthday world" hidden>🗺️</button>
+        <div class="sound-control" aria-label="Music controls">
+          <button id="musicToggle" type="button" aria-label="Play music" title="Music" aria-pressed="false">♫</button>
+          <input id="volume" type="range" min="0" max="1" step=".05" value=".35" aria-label="Music volume">
+        </div>
+        <button id="moonButton" class="moon-button" type="button" aria-label="Tap the moon for a secret" title="Psst...">🌙</button>
+        <button id="fullscreenButton" class="utility-button" type="button" aria-label="Enter fullscreen" title="Fullscreen">⛶</button>
+        <button id="shareButton" class="utility-button" type="button" aria-label="Share this birthday gift" title="Share">↗</button>
+        <button id="wakeButton" class="utility-button" type="button" aria-label="Keep screen awake" title="Keep screen awake">☀</button>
+        <button id="collectionButton" class="utility-button" type="button" aria-label="View birthday badges and adventure progress" title="Badges and progress">🏅</button>
+        <button id="helpButton" class="utility-button" type="button" aria-label="Birthday adventure help" title="How to explore">?</button>
+        <button id="moreButton" class="utility-button more-button" type="button" aria-label="More birthday controls" title="More controls">⋯</button>
+      </div>
+    </header>
+    <div class="progress-wrap" role="progressbar" aria-label="Birthday adventure progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-cone" aria-hidden="true">💗<span id="scoopCount" class="scoop-count">0</span></div>
+      <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+      <div id="progressLabel" class="progress-label">Your adventure</div>
+    </div>
+    <main id="scene" aria-live="polite"></main>
+  </div>
+  <dialog id="infoDialog" class="info-dialog" aria-labelledby="infoDialogTitle">
+    <form method="dialog"><button class="dialog-close" aria-label="Close">×</button></form>
+    <div id="infoDialogContent"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="sprinkleTrail" class="sprinkle-trail" aria-hidden="true"></div>
+  <script src="script.js?v=12" defer></script>
+</body>
+</html>
